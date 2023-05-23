@@ -30,4 +30,10 @@ const deleteCategoria = async (id) => {
         .delete()
 }
 
-module.exports = { getCategorias, getCategoria, storeCategoria, updateCategoria, deleteCategoria}
+
+const storeProdutoCategoria = async (params) => {
+    return await knex('categoria_produto')
+        .insert(params);
+}
+
+module.exports = { getCategorias, getCategoria, storeCategoria, updateCategoria, deleteCategoria, storeProdutoCategoria}
