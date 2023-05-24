@@ -1,10 +1,11 @@
-const { 
+const {
     getCategoria,
-    getCategorias, 
-    storeCategoria, 
-    updateCategoria, 
-    deleteCategoria, 
-    storeProdutoCategoria 
+    getCategorias,
+    storeCategoria,
+    updateCategoria,
+    deleteCategoria,
+    storeProdutoCategoria,
+    getCategoriaProdutos
 } = require('./categoria.model');
 
 module.exports = (app) => {
@@ -35,6 +36,12 @@ module.exports = (app) => {
 
     app.post('/categorias/produto', async (req, res) => {
         const categoria = await storeProdutoCategoria(req.body);
+        res.status(200).json({ data: categoria })
+    })
+
+    app.get('/categorias/:id/produtos', async (req, res) => {
+        const categoria = await getCategoriaProdutos(req.params.id);
+        console.log(categoria);
         res.status(200).json({ data: categoria })
     })
 }

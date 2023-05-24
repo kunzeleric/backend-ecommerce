@@ -36,4 +36,20 @@ const storeProdutoCategoria = async (params) => {
         .insert(params);
 }
 
-module.exports = { getCategorias, getCategoria, storeCategoria, updateCategoria, deleteCategoria, storeProdutoCategoria}
+const getCategoriaProdutos = async (id) => {
+    return await knex('categoria_produto')
+        .where('categoria_produto.categoria_id', id)
+        .innerJoin('produtos', 'produtos.id', 'categoria_produto.produto_id')
+        .select('*')
+
+}
+
+module.exports = { 
+    getCategorias, 
+    getCategoria, 
+    storeCategoria, 
+    updateCategoria, 
+    deleteCategoria, 
+    storeProdutoCategoria, 
+    getCategoriaProdutos 
+}
