@@ -1,8 +1,8 @@
 const { 
     storeCompra,
 } = require('./compra.model');
-
 const transport = require('../../../config/email');
+const axios = require('axios');
 
 module.exports = (app) => {
     app.post('/compras', async (req, res) => {
@@ -18,5 +18,12 @@ module.exports = (app) => {
         await transport.sendMail(message);
 
         res.status(200).json({ data: compra })
+    })
+
+
+    app.get('/compras/link', async (_, res) => {
+        const response = await axios.get('http://localhost:8081');
+
+        res.status(200).json({ data: response.data.data })
     })
 }
